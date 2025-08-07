@@ -18,7 +18,9 @@ export function room2(
   k,
   roomData,
   setCoinCount,
-  previousSceneData = { selectedCharacter: "player" }
+  previousSceneData = { selectedCharacter: "player" },
+  setCoin,
+  coinCount
 ) {
   const { selectedCharacter } = previousSceneData || {};
   const spriteName = selectedCharacter?.sprite || "player";
@@ -42,13 +44,18 @@ export function room2(
   const colliders = roomLayers[1].objects;
   setMapColliders(k, map, colliders);
 
-  const player = k.add(makePlayer(k, healthBar, spriteName, attackSounds));
+  const player = k.add(
+    makePlayer(k, healthBar, spriteName, attackSounds, setCoin, coinCount)
+  );
 
   setCameraControls(k, player, map, roomData);
 
   const positions = roomLayers[2].objects;
   for (const position of positions) {
-    if (position.name === "entrance-1" && previousSceneData.exitName === "exit-1") {
+    if (
+      position.name === "entrance-1" &&
+      previousSceneData.exitName === "exit-1"
+    ) {
       player.setPosition(position.x + map.pos.x, position.y + map.pos.y);
       player.setControls();
       player.enablePassthrough();
@@ -56,7 +63,10 @@ export function room2(
       continue;
     }
 
-    if (position.name === "entrance-2" && previousSceneData.exitName === "exit-2") {
+    if (
+      position.name === "entrance-2" &&
+      previousSceneData.exitName === "exit-2"
+    ) {
       player.respawnIfOutOfBounds(1000, "room2", { exitName: "exit-2" });
       k.camPos(player.pos);
     }
@@ -66,7 +76,9 @@ export function room2(
     }
 
     if (position.type === "coin") {
-      map.add(makeCoin(k, k.vec2(position.x, position.y), setCoinCount, pickupSound));
+      map.add(
+        makeCoin(k, k.vec2(position.x, position.y), setCoinCount, pickupSound)
+      );
     }
 
     if (position.type === "drone") {

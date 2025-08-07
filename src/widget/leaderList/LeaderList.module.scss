@@ -1,0 +1,92 @@
+.leaderList {
+  padding-top: 100px;
+  margin-bottom: 100px;
+
+  .container {
+    width: 1200px;
+    margin: 0 auto;
+
+    .list {
+      margin-top: 100px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+}
+
+.user {
+  height: 60px;
+  width: 100%;
+  //   padding: 5px 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: 0.3s;
+
+  &.id {
+    background-color: $error-color;
+  }
+
+  &:hover {
+    scale: 1.05;
+    border: 1px rgba(237, 202, 6, 0.511) solid;
+  }
+
+  h3 {
+    color: white;
+    font-size: 20px;
+  }
+}
+
+.user:hover::before {
+  opacity: 1;
+}
+
+.user::before,
+.user::after {
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  transition: opacity 500ms;
+  width: 100%;
+}
+
+.user::before {
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(245, 205, 4, 0.26),
+    transparent 20%
+  );
+  z-index: 3;
+}
+
+.user::after {
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(182, 21, 21, 0.4),
+    transparent 40%
+  );
+  z-index: 1;
+}
+
+.user > .cardContent {
+  padding: 5px 20px;
+  width: 100%;
+  border-radius: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 2;
+}

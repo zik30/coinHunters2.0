@@ -1,0 +1,188 @@
+.ellipse {
+  width: min(63vw, 63vh);
+
+  svg {
+    transform: rotate(-40deg);
+    width: 100%;
+    height: 100%;
+
+    text {
+      fill: $accent-color;
+    }
+  }
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.rightBlock {
+  width: 400px;
+
+  h2 {
+    font-size: 30px;
+    color: $accent-color;
+    font-family: $font;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+  width: 400px;
+  height: 60px;
+  margin-bottom: 25px;
+}
+
+.formInput {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #121212;
+  border: 2px solid $accent-color;
+  border-radius: 10px;
+  outline: none;
+  color: aliceblue;
+  padding-left: 10px;
+}
+
+label {
+  position: absolute;
+  background-color: #121212;
+  color: aliceblue;
+  left: 10px;
+  top: 18px;
+  cursor: text;
+  transition: top 350ms ease-in, font-size 350ms ease-in;
+}
+
+.formInput:hover {
+  border: 2px solid #cccbcb72;
+}
+
+.formInput:focus {
+  border: 2px solid $error-color;
+}
+
+input[type="text"]:focus ~ label,
+.formInput:not(:placeholder-shown).formInput:not(:focus) ~ label {
+  top: -7px;
+  font-size: 12px;
+  padding: 0 5px;
+}
+
+.error {
+  position: absolute;
+  top: 55px;
+  color: $error-color;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 15px 40px;
+  border: 1px solid $accent-color;
+  background-color: unset;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 12px;
+}
+.btn::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+/* glow */
+.btn::before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    $error-color,
+    $accent-color,
+    $hover-color,
+    $accent-color,
+    $error-color // #48ff00,
+    // #00ffd5,
+    // #002bff,
+    // #ff00c8,
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 600%;
+  z-index: -1;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  filter: blur(8px);
+  animation: glowing 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+  opacity: 0;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* hover */
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn:active:after {
+  background: transparent;
+}
+
+.btn:active {
+  color: #000;
+  font-weight: bold;
+}
+
+.toast {
+  width: 300px;
+  height: 50px;
+  position: fixed;
+  top: 100px;
+  right: 30px;
+  border-radius: 20px;
+  color: aliceblue;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  &.toastSuccess {
+    background-color: #8fcf06;
+  }
+
+  &.toastError {
+    background-color: $error-color;
+  }
+}

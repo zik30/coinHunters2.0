@@ -1,0 +1,13 @@
+.geek {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $accent-color;
+
+  h2 {
+    font-family: $font;
+    font-size: 40px;
+    margin: 0;
+  }
+}

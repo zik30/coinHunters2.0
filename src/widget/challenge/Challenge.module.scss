@@ -1,0 +1,44 @@
+.challengeSection {
+  background: #111;
+  padding: 0 20px;
+  background: linear-gradient(130deg, $hover-color 0%, #e3cb26 100%);
+  padding: 100px 0;
+  margin: 50px auto;
+  text-align: center;
+  color: #0c0c0c;
+  h2 {
+    font-family: $font;
+    font-weight: 700;
+    margin-bottom: 40px;
+    font-size: 40px;
+  }
+  p {
+    width: 700px;
+    font-size: 25px;
+    line-height: 25px;
+    font-family: sans-serif;
+    margin: 0 auto 30px;
+  }
+  button {
+    background: $error-color;
+    color: $black-color;
+    font-family: "Press Start 2P", monospace;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: $radius;
+    padding: 12px 38px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #00000055;
+    transition: background 0.2s, color 0.2s;
+    margin-bottom: 10px;
+    .btn {
+      color: $white-color !important;
+    }
+  }
+  button:hover {
+    background: $white-color;
+    .btn {
+      color: $error-color !important;
+    }
+  }
+}

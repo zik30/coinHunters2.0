@@ -1,0 +1,28 @@
+.sliderSection {
+  margin: 0 auto;
+  max-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  padding: 0;
+  scrollbar-width: none;
+}
+.sliderTitle {
+  font-family: "Press Start 2P", monospace;
+  color: $white-color;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-top: 60px;
+}
+.sliderSubtitle {
+  color: $accent-color;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  font-family: "Montserrat", Arial, sans-serif;
+  text-align: center;
+}

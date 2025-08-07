@@ -6,7 +6,6 @@ import { state } from "../state/globalStateManager";
 import { makeHealthBar } from "../ui/healthBar";
 import { makeCoin } from "../entities/coin";
 
-
 import {
   setMapColliders,
   setBackgroundColor,
@@ -22,7 +21,8 @@ export async function room1(
   roomData,
   setCoinCount,
   previousSceneData = { selectedCharacter: "player" },
-
+  setCoin,
+  coinCount
 ) {
   const { selectedCharacter } = previousSceneData || {};
   const spriteName = selectedCharacter?.sprite || "player";
@@ -33,7 +33,7 @@ export async function room1(
 
   setBackgroundColor(k, "#cdc3a8");
 
-  const healthBar = makeHealthBar(k)
+  const healthBar = makeHealthBar(k);
   const counter = makeCounter(k);
 
   k.camScale(4);
@@ -48,16 +48,18 @@ export async function room1(
   setMapColliders(k, map, colliders);
 
   const tips = roomLayers[3].objects;
-  setTipsRtigger(k, map, tips)
-  
-  const player = map.add(makePlayer(k, healthBar, spriteName, attackSounds));
+  setTipsRtigger(k, map, tips);
+
+  const player = map.add(
+    makePlayer(k, healthBar, spriteName, attackSounds, setCoin, coinCount)
+  );
   k.add([
-    k.text('hello', { size: 100 }),
+    k.text("hello", { size: 100 }),
     k.pos(k.center().x - 90, k.center().y - 30),
     k.z(1),
     k.color(255, 255, 255),
     k.opacity(1),
-    "popup"
+    "popup",
   ]);
 
   setCameraControls(k, player, map, roomData);
@@ -117,7 +119,9 @@ export async function room1(
     }
 
     if (position.type === "coin") {
-      map.add(makeCoin(k, k.vec2(position.x, position.y), setCoinCount, pickupSound));
+      map.add(
+        makeCoin(k, k.vec2(position.x, position.y), setCoinCount, pickupSound)
+      );
     }
   }
 
@@ -125,8 +129,7 @@ export async function room1(
   setCameraZones(k, map, cameras);
 
   const exits = roomLayers[4].objects;
-  setExitZones(k, map, exits, "room2", selectedCharacter );
-
+  setExitZones(k, map, exits, "room2", selectedCharacter);
 
   healthBar.setEvents();
   healthBar.trigger("update");

@@ -2,7 +2,14 @@ import { state, statePropsEnum } from "../state/globalStateManager.js";
 import { makeCounter } from "../ui/coinCounter.js";
 import { makeBlink } from "./entitySharedLogic.js";
 
-export function makePlayer(k, healthBar, spriteName = "player", attackSounds = []) {
+export function makePlayer(
+  k,
+  healthBar,
+  spriteName = "player",
+  attackSounds = [],
+  setCoin,
+  coinCount
+) {
   const counter = makeCounter(k);
   return k.make([
     k.pos(),
@@ -30,10 +37,12 @@ export function makePlayer(k, healthBar, spriteName = "player", attackSounds = [
         });
       },
       setControls() {
-        console.log('[Player] setControls called', {sprite: this.sprite?.id, handlers: this.controlHandlers?.length});
+        console.log("[Player] setControls called", {
+          sprite: this.sprite?.id,
+          handlers: this.controlHandlers?.length,
+        });
         if (this.disableControls) this.disableControls();
         this.controlHandlers = [];
-
 
         this.controlHandlers.push(
           k.onKeyPress((key) => {
@@ -46,7 +55,7 @@ export function makePlayer(k, healthBar, spriteName = "player", attackSounds = [
               console.log("[Player] Z pressed:", {
                 curAnim: this.curAnim(),
                 isAttacking: this.isAttacking,
-                pause: state.current().pause
+                pause: state.current().pause,
               });
             }
 
@@ -59,7 +68,10 @@ export function makePlayer(k, healthBar, spriteName = "player", attackSounds = [
               if (sound) {
                 k.play(sound);
               }
-              if (window.attackTipBox && typeof window.attackTipBox.close === "function") {
+              if (
+                window.attackTipBox &&
+                typeof window.attackTipBox.close === "function"
+              ) {
                 window.attackTipBox.close();
                 window.attackTipBox = null;
                 if (window.isAttackTipOpen) window.isAttackTipOpen = false;
@@ -97,7 +109,11 @@ export function makePlayer(k, healthBar, spriteName = "player", attackSounds = [
               return;
             }
 
-            if (key === "right" && !this.isAttacking && !state.current().pause) {
+            if (
+              key === "right" &&
+              !this.isAttacking &&
+              !state.current().pause
+            ) {
               if (this.curAnim() !== "run" && this.isGrounded()) {
                 this.play("run");
               }
@@ -175,12 +191,13 @@ export function makePlayer(k, healthBar, spriteName = "player", attackSounds = [
           }
 
           state.set(statePropsEnum.playerHp, state.current().maxPlayerHp);
-          // k.play("boom");
+          k.play("boom");
           this.play("explode");
         });
 
-        this.onAnimEnd((anim) => {
+        this.onAnimEnd(async (anim) => {
           if (anim === "explode") {
+            await setCoin(coinCount);
             window.location.href = "/leaderboard";
           }
         });
