@@ -3,7 +3,7 @@ import FelixImg from "@assets/images/front/Felix.jpg";
 import AkjolImg from "@assets/images/front/Akjol.jpg";
 import RadomirImg from "@assets/images/back/Radomir.jpg";
 import AlekseyImg from "@assets/images/mob/Aleksei.webp";
-import TalgarImg from "@assets/images/uxui/Talgar.jpg";
+import AidanaImg from "@assets/images/uxui/Aidana.webp";
 import classNames from "classnames";
 
 const front = [
@@ -42,11 +42,11 @@ const mob = [
 ];
 const uxui = [
   {
-    name: "Талгар",
+    name: "Айдана",
     surname: "",
     role: "",
     exp: "Преподаватель по UxUi",
-    img: TalgarImg,
+    img: AidanaImg,
   },
 ];
 
