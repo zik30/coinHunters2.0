@@ -1,5 +1,5 @@
 import Instruction from "@widget/instruction/Instruction.jsx";
-import { Hero } from "@widget/hero/hero.jsx";
+import { Hero } from "@widget/hero/Hero.jsx";
 import { About } from "@widget/about/About.jsx";
 import { SliderSection } from "@widget/sliderSection/SliderSection.jsx";
 import { Challenge } from "@widget/challenge/Challenge";
