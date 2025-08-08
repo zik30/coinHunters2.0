@@ -27,8 +27,13 @@ export default defineConfig({
     commonjsOptions: {
       include: [],
     },
+    rollupOptions: {
+      output: {
+        format: "es",
+      },
+    },
   },
   optimizeDeps: {
-    include: ["kaboom"],
+    // include: ["kaboom"],
   },
 });
