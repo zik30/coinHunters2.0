@@ -23,6 +23,12 @@ export default defineConfig({
   },
   build: {
     sourcemap: true,
+    commonjsOptions: {
+      include: [],
+    },
+    rollupOptions: {
+      external: ["kaboom"],
+    },
   },
   optimizeDeps: {
     exclude: ["kaboom"],
