@@ -5,7 +5,7 @@ import u3 from "@assets/sprites/u2.png";
 import dr0ne from "@assets/sprites/dr0ne.png";
 import burn3r from "@assets/sprites/burn3r.png";
 import AkjolSprite from "@assets/sprites/AkjolSprite.png";
-import BakstybekSprite from "@assets/sprites/BakstybekSprite.png";
+import BakstybekSprite from "@assets/sprites/AkjolSprite.png";
 import EgorSprite from "@assets/sprites/EgorSprite.png";
 import FelixSprite from "@assets/sprites/FelixSprite.png";
 import NurdinSprite from "@assets/sprites/NurdinSprite.png";
