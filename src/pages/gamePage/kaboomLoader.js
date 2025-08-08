@@ -20,7 +20,7 @@ import AidanaSprite from "@assets/sprites/AidanaSprite.png";
 
 import uiPng from "@assets/ui.png";
 import animationsPng from "@assets/animations.png";
-import coinPng from "@assets/coin.png";
+import coinPng from "@assets/animations.png";
 import tilesetPng from "@assets/tileset.png";
 import backgroundPng from "@assets/background.png";
 
