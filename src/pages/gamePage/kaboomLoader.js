@@ -11,7 +11,7 @@ export function initKaboom(canvas) {
     letterbox: true,
     clearColor: [0, 0, 0, 1],
     canvas,
-    global: true,
+    // global: true,
   });
   return k;
 }
