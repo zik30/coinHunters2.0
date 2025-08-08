@@ -27,9 +27,6 @@ export default defineConfig({
     commonjsOptions: {
       include: [],
     },
-    rollupOptions: {
-      external: ["kaboom"],
-    },
   },
   optimizeDeps: {
     include: ["kaboom"],
