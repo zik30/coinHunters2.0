@@ -37,8 +37,8 @@ import FelixAliluyaM4a from "@assets/sounds/Felix-Aliluya.m4a";
 import Nurdin1M4a from "@assets/sounds/Nurdin-1.m4a";
 import Nurdin2M4a from "@assets/sounds/Nurdin-2.m4a";
 
-import room1Png from "@assets/maps/room1.png";
-import room2Png from "@assets/maps/room2.png";
+import room1Png from "/maps/room1.png";
+import room2Png from "/maps/room2.png";
 
 export const scale = 2;
 export let k;
