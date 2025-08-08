@@ -47,7 +47,7 @@ export function characterSelection(ctx) {
     // { name: "mob1", sprite: "mob1", description: "Mobile Developer Albert" },
     {
       name: "mob2",
-      sprite: "player3",
+      sprite: "mob2",
       description: "Mobile Developer Aleksei",
     },
   ];
