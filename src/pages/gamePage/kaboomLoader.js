@@ -25,8 +25,8 @@ import tilesetPng from "@assets/tileset.png";
 import backgroundPng from "@assets/background.png";
 
 import notifyMp3 from "@assets/sounds/notify.mp3";
-import boomM4a from "@assets/sounds/Ahtung.m4a";
-import healthM4a from "@assets/sounds/Aliluya.m4a";
+import boomM4a from "@assets/sounds/Felix-Ahtung.m4a";
+import healthM4a from "@assets/sounds/Felix-Aliluya.m4a";
 import flamethrowerMp3 from "@assets/sounds/flamethrower.mp3";
 import Akjol1M4a from "@assets/sounds/Akjol-1.m4a";
 import Akjol2M4a from "@assets/sounds/Akjol-2.m4a";
