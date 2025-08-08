@@ -32,6 +32,13 @@ export default defineConfig({
         format: "es",
       },
     },
+    minify: "terser",
+    terserOptions: {
+      mangle: {
+        // исключить имена, чтобы избежать подобных ошибок
+        reserved: ["od"],
+      },
+    },
   },
   optimizeDeps: {
     // include: ["kaboom"],
