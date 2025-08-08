@@ -32,6 +32,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ["kaboom"],
+    include: ["kaboom"],
   },
 });
