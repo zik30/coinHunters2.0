@@ -11,14 +11,14 @@ const front = [
     name: "Феликс",
     surname: "",
     role: "",
-    exp: "Преподаватель по Frontu (1 месяц)",
+    exp: "Отец ФРОНТЕНДА🧙🏽‍♂️",
     img: FelixImg,
   },
   {
     name: "Акжол",
     surname: "",
     role: "",
-    exp: "Преподаватель по Frontu (3 месяц)",
+    exp: "Тревис Скотт🤘🏾",
     img: AkjolImg,
   },
 ];
@@ -27,7 +27,7 @@ const back = [
     name: "Радомир",
     surname: "",
     role: "",
-    exp: "Преподаватель по Backe",
+    exp: "Преподаватель по Backy",
     img: RadomirImg,
   },
 ];
