@@ -32,16 +32,18 @@ const useUserStore = create(
           return;
         }
 
+        const updatedCoin = newCoin + get().coin;
+
         try {
           await axios.put(
             `https://66a8b255e40d3aa6ff5902eb.mockapi.io/players/${id}`,
             {
               name: get().name,
               phone: get().phone,
-              coin: newCoin,
+              coin: updatedCoin,
             }
           );
-          set({ coin: newCoin });
+          set({ coin: updatedCoin });
         } catch (error) {
           console.error("Ошибка при обновлении монет:", error);
         }
