@@ -147,7 +147,7 @@ export function loadAssets(k) {
   k.loadSpriteAtlas(coinPng, {
     coin: {
       x: 125,
-      y: 145,
+      y: 161,
       width: 134,
       height: 16,
       sliceX: 8,
@@ -160,7 +160,7 @@ export function loadAssets(k) {
   k.loadSpriteAtlas(coinPng, {
     counter: {
       x: 125,
-      y: 145,
+      y: 161,
       width: 134,
       height: 16,
       sliceX: 8,

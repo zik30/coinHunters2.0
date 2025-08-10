@@ -197,7 +197,7 @@ export function makePlayer(
 
         this.onAnimEnd(async (anim) => {
           if (anim === "explode") {
-            await setCoin(coinCount);
+            await setCoin(state.current().coin);
             window.location.href = "/leaderboard";
           }
         });

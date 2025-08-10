@@ -24,16 +24,13 @@ const useUserStore = create(
       phone: "",
       coin: 0,
       setUser: (name, phone) => set((state) => ({ ...state, name, phone })),
-      setCoin: async (coin) => {
+      setCoin: async (newCoin) => {
         const id = await findId(get().phone);
 
         if (!id) {
           console.error("ID не найден. Обновление coin отменено.");
           return;
         }
-
-        const currentCoin = get().coin;
-        const newCoin = currentCoin + coin;
 
         try {
           await axios.put(

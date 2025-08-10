@@ -8,6 +8,7 @@ import { characterSelection } from "./scenes/characterSelection";
 import { directionSelector } from "./scenes/directionSelector";
 import style from "./GamePage.module.scss";
 import useUserStore from "@store/userStore.js";
+import { state } from "./state/globalStateManager.js";
 
 const Game = () => {
   const canvasRef = useRef(null);
@@ -32,15 +33,16 @@ const Game = () => {
         room2(k, room2Data, setCoinCount, previousSceneData, setCoin, coinCount)
       );
 
-      k.scene("final-exit", () => {
+      k.scene("final-exit", async () => {
         setBackgroundColor(k, "#20214a");
+        await setCoin(1200);
         k.add(
           makeNotificationBox(
             k,
             "You escaped the factory!\n The End. Thanks for playing!\n\nPress ENTER to go\n to the leaderboard."
           )
         );
-        setCoin(coinCount);
+        setCoin(state.current().coin);
         k.onKeyPress((key) => {
           if (key === "enter") {
             window.location.href = "/leaderboard";
