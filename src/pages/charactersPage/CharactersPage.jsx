@@ -1,4 +1,4 @@
-import { CharactersBySection } from "../../widget/charactersBySection/CharactersBySection";
+import { CharactersBySection } from "@widget/charactersBySection/CharactersBySection";
 import { NoTeacher } from "@widget/noTeacher/NoTeacher";
 
 export const CharactersPage = () => {
