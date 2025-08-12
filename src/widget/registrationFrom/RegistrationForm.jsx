@@ -82,9 +82,7 @@ export const RegistrationForm = () => {
 
   const checkUserExists = async (phone) => {
     try {
-      const response = await axios.get(
-        "https://66a8b255e40d3aa6ff5902eb.mockapi.io/players"
-      );
+      const response = await axios.get("https://geeks-game.onrender.com/users");
       const userExists = response.data.find((user) => user.phone === phone);
       if (userExists) {
         console.log("Пользователь найден:", userExists);
@@ -107,11 +105,11 @@ export const RegistrationForm = () => {
         if (data.username !== userExists.name) {
           try {
             await axios.put(
-              `https://66a8b255e40d3aa6ff5902eb.mockapi.io/players/${userExists.id}`,
+              `https://geeks-game.onrender.com/users/${userExists.id}`,
               {
                 name: data.username,
                 phone: userExists.phone,
-                coin: userExists.coin,
+                coins: userExists.coins,
               }
             );
           } catch (error) {
@@ -121,7 +119,7 @@ export const RegistrationForm = () => {
           }
         }
         setUser(data.username, data.telephone);
-        setCoin(userExists.coin);
+        setCoin(userExists.coins);
         showToast("success");
         setTimeout(() => {
           navigate("/game");
@@ -129,12 +127,12 @@ export const RegistrationForm = () => {
         return;
       }
 
-      const url = "https://66a8b255e40d3aa6ff5902eb.mockapi.io/players";
+      const url = "https://geeks-game.onrender.com/users";
 
       await axios.post(url, {
         name: data.username,
         phone: data.telephone,
-        coin: 0,
+        coins: 0,
       });
       showToast("success");
       setUser(data.username, data.telephone);

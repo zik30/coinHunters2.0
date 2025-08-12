@@ -58,7 +58,7 @@ export const LeaderList = () => {
     const fetchGamers = async () => {
       try {
         const response = await axios.get(
-          "https://66a8b255e40d3aa6ff5902eb.mockapi.io/players"
+          "https://geeks-game.onrender.com/users"
         );
         setUsers(response.data);
       } catch (error) {
@@ -82,7 +82,7 @@ export const LeaderList = () => {
     });
   };
 
-  const sortedUsers = [...users].sort((a, b) => b.coin - a.coin);
+  const sortedUsers = [...users].sort((a, b) => b.coins - a.coins);
 
   const topUsers = sortedUsers.slice(0, 3);
   const otherUsers = sortedUsers.slice(3);
@@ -109,7 +109,7 @@ export const LeaderList = () => {
               <div className={styles.cardContent}>
                 <h3>{id + 4}</h3>
                 <h3>{user.name}</h3>
-                <h3>{user.coin}</h3>
+                <h3>{user.coins}</h3>
               </div>
             </div>
           ))}

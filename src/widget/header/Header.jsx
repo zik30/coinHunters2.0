@@ -24,7 +24,7 @@ const navLink = [
 
 const Header = () => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const { name, coin, logout } = useUserStore();
+  const { name, coins, logout } = useUserStore();
 
   return (
     <header className={styles.header}>
@@ -54,7 +54,7 @@ const Header = () => {
                 {name ? (
                   <>
                     <h4>{name}</h4>
-                    <p>Coins: {coin}</p>
+                    <p>Coins: {coins}</p>
                     <button onClick={logout}>Logout</button>
                   </>
                 ) : (

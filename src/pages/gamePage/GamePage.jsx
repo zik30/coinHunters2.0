@@ -12,8 +12,8 @@ import { state } from "./state/globalStateManager.js";
 
 const Game = () => {
   const canvasRef = useRef(null);
-  const { setCoin, coin } = useUserStore();
-  const [coinCount, setCoinCount] = useState(coin);
+  const { setCoin, coins } = useUserStore();
+  const [coinCount, setCoinCount] = useState(coins);
 
   useEffect(() => {
     if (!canvasRef.current) return;

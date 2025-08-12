@@ -3,9 +3,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const findId = async (phone) => {
-  const { data } = await axios.get(
-    "https://66a8b255e40d3aa6ff5902eb.mockapi.io/players/"
-  );
+  const { data } = await axios.get("https://geeks-game.onrender.com/users/");
 
   const user = data.find((u) => u.phone === phone);
 
@@ -14,7 +12,7 @@ const findId = async (phone) => {
     return;
   }
 
-  return user.id;
+  return user._id;
 };
 
 const useUserStore = create(
@@ -22,7 +20,7 @@ const useUserStore = create(
     (set, get) => ({
       name: "",
       phone: "",
-      coin: 0,
+      coins: 0,
       setUser: (name, phone) => set((state) => ({ ...state, name, phone })),
       setCoin: async (newCoin) => {
         const id = await findId(get().phone);
@@ -32,23 +30,20 @@ const useUserStore = create(
           return;
         }
 
-        const updatedCoin = newCoin + get().coin;
+        const updatedCoin = newCoin + get().coins;
 
         try {
-          await axios.put(
-            `https://66a8b255e40d3aa6ff5902eb.mockapi.io/players/${id}`,
-            {
-              name: get().name,
-              phone: get().phone,
-              coin: updatedCoin,
-            }
-          );
-          set({ coin: updatedCoin });
+          await axios.put(`https://geeks-game.onrender.com/users/${id}`, {
+            name: get().name,
+            phone: get().phone,
+            coins: updatedCoin,
+          });
+          set({ coins: updatedCoin });
         } catch (error) {
           console.error("Ошибка при обновлении монет:", error);
         }
       },
-      logout: () => set({ name: "", phone: "", coin: 0 }),
+      logout: () => set({ name: "", phone: "", coins: 0 }),
     }),
     {
       name: "user-storage",
