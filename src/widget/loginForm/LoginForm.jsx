@@ -1,15 +1,15 @@
-import styles from "./RegistrationForm.module.scss";
+import styles from "./LoginForm.module.scss";
 import { AnimatedPath } from "@widget/animatedPath/AnimatedPath";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import useUserStore from "../../store/userStore";
+import useUserStore from "@store/userStore";
 
-export const RegistrationForm = () => {
+export const LoginForm = () => {
   const { login } = useUserStore();
-  const [toast, setToast] = useState({ type: null, message: null });
+  const [toast, setToast] = useState(null);
   const navigate = useNavigate();
   const {
     register,
@@ -17,16 +17,16 @@ export const RegistrationForm = () => {
     formState: { errors },
   } = useForm();
 
-  const showToast = (type, message) => {
-    setToast({ type, message });
-    setTimeout(() => setToast({ type: null, message: null }), 3000);
+  const showToast = (type) => {
+    setToast(type);
+    setTimeout(() => setToast(null), 3000);
   };
 
   const mutation = useMutation({
     mutationKey: ["login"],
     mutationFn: async (data) => {
       const response = await axios.post(
-        "https://geeks-game.onrender.com/auth/register",
+        "https://geeks-game.onrender.com/auth/login",
         data,
         {
           headers: { "Content-Type": "application/json" },
@@ -38,16 +38,15 @@ export const RegistrationForm = () => {
     },
     onSuccess: (response) => {
       login(response);
-      showToast("success", "Ты успешно зарегистрирован😁");
+      showToast("success");
       navigate("/game");
     },
     onError: (error) => {
-      let message;
-
+      let message = "Что-то пошло не так(";
       if (axios.isAxiosError(error) && error.response?.data?.message) {
         message = error.response.data.message;
       }
-      showToast("error", message);
+      showToast(message);
     },
   });
 
@@ -71,7 +70,7 @@ export const RegistrationForm = () => {
           />
         </div>
         <div className={styles.rightBlock}>
-          <h2>Registration</h2>
+          <h2>Login</h2>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.formGroup}>
             <div className={styles.inputWrapper}>
               <input
@@ -83,9 +82,8 @@ export const RegistrationForm = () => {
                 {...register("username", {
                   required: "Введите имя пользователя",
                   pattern: {
-                    value: /^[a-zA-Zа-яА-ЯёЁ0-9_]{3,50}$/,
-                    message:
-                      "Допустимы только буквы, цифры и _ (3–50 символов)",
+                    value: /^[a-zA-Zа-яА-ЯёЁ0-9]{3,}$/,
+                    message: "Имя должно содержать минимум 3 буквы",
                   },
                 })}
               />
@@ -104,9 +102,8 @@ export const RegistrationForm = () => {
                 {...register("password", {
                   required: "Введите пароль",
                   pattern: {
-                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,128}$/,
-                    message:
-                      "Пароль должен содержать буквы и цифры (6–128 символов)",
+                    value: /^.{5,}$/,
+                    message: "Пароль должен содержать минимум 5 символов",
                   },
                 })}
                 maxLength={16}
@@ -121,22 +118,22 @@ export const RegistrationForm = () => {
             </button>
           </form>
           <p className={styles.text}>
-            У тебя уже есть аккаунт?!😎{" "}
-            <button type="button" onClick={() => navigate("/login")}>
-              быстрее заходи!
+            У вас до сих пор не было аккауна?!😮{" "}
+            <button onClick={() => navigate("/registration")}>
+              быстрее зарегистрируйтесь!
             </button>
           </p>
         </div>
       </div>
-      {toast.type && (
+      {toast && (
         <div
           className={`${styles.toast} ${
-            toast.type === "success" ? styles.toastSuccess : styles.toastError
+            toast === "success" ? styles.toastSuccess : styles.toastError
           }`}
         >
-          {toast.type === "success"
-            ? "Ты успешно зарегистрирован😁"
-            : toast.message}
+          {toast === "success"
+            ? "Ты успешно зарегистрирован)"
+            : "Такого пользователя не существует("}
         </div>
       )}
     </section>

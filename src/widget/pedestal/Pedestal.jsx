@@ -17,7 +17,7 @@ export const Pedestal = ({ data }) => {
             {data?.[1] && (
               <>
                 <div className={styles.leaderboardPlayersHeader}>
-                  <h4>{data[1].name}</h4>
+                  <h4>{data[1].username}</h4>
                 </div>
                 <h4>{data[1].coins}</h4>
               </>
@@ -31,7 +31,7 @@ export const Pedestal = ({ data }) => {
             {data?.[0] && (
               <>
                 <div className={styles.leaderboardPlayersHeader}>
-                  <h4>{data[0].name}</h4>
+                  <h4>{data[0].username}</h4>
                 </div>
                 <h4>{data[0].coins}</h4>
               </>
@@ -45,7 +45,7 @@ export const Pedestal = ({ data }) => {
             {data?.[2] && (
               <>
                 <div className={styles.leaderboardPlayersHeader}>
-                  <h4>{data[2].name}</h4>
+                  <h4>{data[2].username}</h4>
                 </div>
                 <h4>{data[2].coins}</h4>
               </>

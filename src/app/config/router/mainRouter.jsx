@@ -8,6 +8,7 @@ import { RegistrationPage2 } from "@pages/registrationPage/RegistrationPage2";
 import Game from "@pages/gamePage/GamePage";
 import { CharactersPage } from "@pages/charactersPage/CharactersPage";
 import { AnouncementsPage } from "@pages/anouncementsPage/AnouncementsPage";
+import LoginPage from "@pages/loginPage/LoginPage";
 
 export const router = () =>
   createBrowserRouter([
@@ -32,10 +33,18 @@ export const router = () =>
           ),
         },
         {
-          path: "registration",
+          path: "/registration",
           element: (
             <GuestGuard>
               <RegistrationPage2 />
+            </GuestGuard>
+          ),
+        },
+        {
+          path: "/login",
+          element: (
+            <GuestGuard>
+              <LoginPage />
             </GuestGuard>
           ),
         },

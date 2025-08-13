@@ -1,73 +1,26 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import styles from "./LeaderList.module.scss";
 import { Pedestal } from "@widget/pedestal/Pedestal";
-import axios from "axios";
 import useUserStore from "../../store/userStore";
 import classNames from "classnames";
-
-// const users = [
-//   {
-//     name: "zik",
-//     coin: 1000,
-//   },
-//   {
-//     name: "zik",
-//     coin: 1000,
-//   },
-//   {
-//     name: "zik",
-//     coin: 1000,
-//   },
-//   {
-//     name: "zik",
-//     coin: 1000,
-//   },
-//   {
-//     name: "zik",
-//     coin: 1000,
-//   },
-//   {
-//     name: "zik",
-//     coin: 1000,
-//   },
-//   {
-//     name: "zik",
-//     coin: 1000,
-//   },
-//   {
-//     name: "zik",
-//     coin: 1000,
-//   },
-//   {
-//     name: "zik",
-//     coin: 1000,
-//   },
-//   {
-//     name: "zik",
-//     coin: 1000,
-//   },
-// ];
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 export const LeaderList = () => {
   const containerRef = useRef(null);
   const cardRefs = useRef([]);
-  const [users, setUsers] = useState([]);
-  const { phone } = useUserStore();
+  const { username } = useUserStore();
 
-  useEffect(() => {
-    const fetchGamers = async () => {
-      try {
-        const response = await axios.get(
-          "https://geeks-game.onrender.com/users"
-        );
-        setUsers(response.data);
-      } catch (error) {
-        console.error("Ошибка при получении игроков:", error);
-      }
-    };
-
-    fetchGamers();
-  }, []);
+  // Запрос через TanStack Query
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["leaderboard"],
+    queryFn: async () => {
+      const res = await axios.get(
+        "https://geeks-game.onrender.com/api/user/leaderboard?limit=100"
+      );
+      return res.data;
+    },
+  });
 
   const handleMouseMove = (e) => {
     cardRefs.current.forEach((card) => {
@@ -82,33 +35,41 @@ export const LeaderList = () => {
     });
   };
 
-  const sortedUsers = [...users].sort((a, b) => b.coins - a.coins);
+  if (isLoading) {
+    return <div className={styles.loading}>Загрузка...</div>;
+  }
 
-  const topUsers = sortedUsers.slice(0, 3);
-  const otherUsers = sortedUsers.slice(3);
+  if (isError || !data?.success) {
+    return <div className={styles.error}>Ошибка при получении данных</div>;
+  }
+
+  const leaderboard = data.leaderboard || [];
+
+  const topUsers = leaderboard.slice(0, 3);
+  const otherUsers = leaderboard.slice(3);
 
   return (
     <section className={styles.leaderList}>
       <div className={styles.container}>
-        {topUsers && <Pedestal data={topUsers} />}
+        {topUsers.length > 0 && <Pedestal data={topUsers} />}
 
         <div
           className={styles.list}
           ref={containerRef}
           onMouseMove={handleMouseMove}
         >
-          {otherUsers?.map((user, id) => (
+          {otherUsers.map((user, idx) => (
             <div
-              key={id}
+              key={user.rank}
               className={classNames(
                 styles.user,
-                user.phone === phone && styles.id
+                user.username === username && styles.id
               )}
-              ref={(el) => (cardRefs.current[id] = el)}
+              ref={(el) => (cardRefs.current[idx] = el)}
             >
               <div className={styles.cardContent}>
-                <h3>{id + 4}</h3>
-                <h3>{user.name}</h3>
+                <h3>{user.rank}</h3>
+                <h3>{user.username}</h3>
                 <h3>{user.coins}</h3>
               </div>
             </div>

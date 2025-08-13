@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import useUserStore from "../../../store/userStore";
 
 export const GuestGuard = ({ children }) => {
-  const { name } = useUserStore();
+  const { isAuth } = useUserStore();
 
-  return !name ? children : <Navigate to={"/"} replace />;
+  return !isAuth ? children : <Navigate to={"/"} replace />;
 };
